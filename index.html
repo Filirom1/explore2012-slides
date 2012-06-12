@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Backbone.js - Why single page applications are powerful</title>
+    <meta charset='utf-8' />
+    <meta content='width=1024, user-scalable=no' name='viewport' />
+    <!-- deck.js's core css -->
+    <link href="deck.js/core/deck.core.css" rel="stylesheet" type="text/css"/>
+    <!-- deck.js extension CSS files -->
+    <link href="deck.js/extensions/menu/deck.menu.css" rel="stylesheet" type="text/css"/>
+    <link href="deck.js/extensions/navigation/deck.navigation.css" rel="stylesheet" type="text/css"/>
+    <link href="deck.js/extensions/goto/deck.goto.css" rel="stylesheet" type="text/css"/>
+    <link href="deck.js/extensions/hash/deck.hash.css" rel="stylesheet" type="text/css"/>
+    <link href="deck.js/extensions/status/deck.status.css" rel="stylesheet" type="text/css"/>
+    <link href="deck.js/extensions/scale/deck.scale.css" rel="stylesheet" type="text/css"/>
+    <link href="deck.js/extensions/codemirror/deck.codemirror.css" rel="stylesheet" type="text/css"/>
+    <!-- all css in the css dir: Keydown CSS, your custom CSS, and themes from deck.js -->
+    <link href="css/keydown.css" rel="stylesheet" type="text/css"/>
+    <link href="css/default.css" rel="stylesheet" type="text/css"/>
+    <link href="css/my_presentation.css" rel="stylesheet" type="text/css"/>
+    <link href="css/horizontal-slide.css" rel="stylesheet" type="text/css"/>
+    <link href="css/swiss.css" rel="stylesheet" type="text/css"/>
+    <!-- Modernizr (provided for legacy browsers) -->
+    <script src="deck.js/support/modernizr.custom.js" type="text/javascript"></script>
+  </head>
+  <body class='deck-container keydown'>
+    <section class='slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Backbone.js</h1>
+
+        <h2>Why SPA are powerful</h2>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>About me</h1>
+
+        <p>Romain Philibert</p>
+
+        <p>@Atos since 1 year</p>
+
+        <p>PEPS - BSD</p>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>SPA ?</h1>
+
+    <h2>=== Single Page Application</h2>
+
+    <p><textarea class='code' display='none' mode='htmlmixed'><!doctype html>&#x000A;<html>&#x000A;<head>&#x000A;  <link rel="stylesheet" href="app.459703.css">&#x000A;</head>&#x000A;<body>&#x000A;  <div role="main"> </div>&#x000A;&#x000A;  <script src="app.6423e0.js"></script>&#x000A;</body>&#x000A;</html></textarea>
+</p>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>URL History</h1>
+
+<h2>Classic:</h2>
+
+<p>Url:</p>
+
+<pre><code>http://company.ext/page1
+http://company.ext/page2/subpage
+</code></pre>
+
+<p>Html:</p>
+
+<p><textarea class='code' display='none' mode='htmlmixed'><a href="page1">Click on me</a></textarea>
+</p>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>URL <span style="text-decoration: line-through;">History</span></h1>
+
+<h2>In JS</h2>
+
+<p>Url:</p>
+
+<pre><code>http://company.ext/
+http://company.ext/
+</code></pre>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>URL <span style="text-decoration: line-through;">History</span></h1>
+
+    <h2>In JS</h2>
+
+    <p>Html:</p>
+
+    <p><textarea class='code' display='none' mode='htmlmixed'><a class="link1" href="#">Click on me</a></textarea>
+</p>
+
+    <p>JS:</p>
+
+    <p><textarea class='code' display='none' mode='javascript'>$('a.link1').click(function(e){&#x000A;  e.preventDefault();&#x000A;  $('#main').load('http://company.ext/partials-1.html');&#x000A;})</textarea>
+</p>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>URL History</h1>
+
+<h2>In JS with an hashUrl Router</h2>
+
+<p>Url:</p>
+
+<pre><code>http://company.ext/#page1
+http://company.ext/#page2/a-sub-page
+</code></pre>
+
+<p>Html:</p>
+
+<p><textarea class='code' display='none' mode='htmlmixed'><a href="#/page1">Click on me</a></textarea>
+</p>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>URL History</h1>
+
+    <h2>In BB with an hashUrl Router</h2>
+
+    <p><textarea class='code' display='none' mode='javascript'>var App = Backbone.Router.extend({&#x000A;  routes: {&#x000A;    "page1":               "page1",&#x000A;    "page2/:sub":          "page2"&#x000A;  },&#x000A;&#x000A;  page1: function(){&#x000A;    $('#main').load('/partials-1.html')&#x000A;  },&#x000A;  page2: function(subPage){&#x000A;    $('#main').load('/sub/' + subPage + 'html')&#x000A;  }&#x000A;});&#x000A;&#x000A;Backbone.history.start()</textarea>
+</p>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>URL History</h1>
+
+<h2>In JS with a pushState Router</h2>
+
+<p>Url:</p>
+
+<pre><code>http://company.ext/page1
+http://company.ext/page2/a-sub-page
+</code></pre>
+
+<p>Html:</p>
+
+<p><textarea class='code' display='none' mode='htmlmixed'><a href="/page1">Click on me</a></textarea>
+</p>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>URL History</h1>
+
+    <h2>In BB with a pushState Router</h2>
+
+    <p><textarea class='code' display='none' mode='javascript'>var App = Backbone.Router.extend({&#x000A;  //same than before&#x000A;});&#x000A;&#x000A;Backbone.history.start({pushState: true})</textarea>
+</p>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Separation of concerns</h1>
+
+        <ul>
+        <li>KLOC of Javascript mixed with Server side rendering.</li>
+        </ul>
+
+
+        <p><img src="http://images.lifesambrosia.com/food/large/spaghetti-carbonara.jpg" alt="Quite hard" /></p>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='long slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Separation of concerns</h1>
+
+        <p>MIDLLE === WebService REST</p>
+
+        <p><img src="http://www.crummy.com/writing/RESTful-Web-Services/cover.png" alt="REST Webservice" /></p>
+
+        <p>FRONT === Serving static files: html, css, js</p>
+
+        <p><img src="http://blog.dev-art.fr/wp-content/uploads/2012/03/nginx_php1.gif" alt="Nginx" /></p>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>Separation of concerns</h1>
+
+<ul>
+<li><a href="">templating</a></li>
+<li><a href="">model</a></li>
+<li><a href="">view</a></li>
+<li><a href="">modularize your code</a></li>
+<li><a href="">communicate between instances</a></li>
+<li><a href="">instances life cycle</a></li>
+<li><a href="">synchronize views with models</a></li>
+<li><a href="">memory leaks</a></li>
+<li><a href="">optimize your assets for production</a></li>
+<li><a href="">SEO</a></li>
+<li><a href="">i18n</a></li>
+<li><a href="">test</a></li>
+</ul>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='slide template'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>Template</h1>
+
+    <p>What is a template:</p>
+
+    <p><textarea class='code' display='none' mode='htmlmixed'><div class="entry">&#x000A;  <h1>{{title}}</h1>&#x000A;  <h2>By {{author.name}}</h2>&#x000A;  <div class="body">&#x000A;    {{body}}&#x000A;  </div>&#x000A;</div></textarea>
+</p>
+
+    <p>Datas</p>
+
+    <p><textarea class='code' display='none' mode='javascript'>{&#x000A;  title: "My First Blog Post!",&#x000A;  author: {&#x000A;    id: 47,&#x000A;    name: "Yehuda Katz"&#x000A;  },&#x000A;  body: "My first post. Wheeeee!"&#x000A;};</textarea>
+</p>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>Template</h1>
+
+    <p>Compile and populate</p>
+
+    <p><textarea class='code' display='none' mode='javascript'>var template = Handlebars.compile(templateStr);&#x000A;$('#main').html(template(data)}</textarea>
+</p>
+
+    <p>And we obtain this</p>
+
+    <p><textarea class='code' display='none' mode='htmlmixed'><div class="entry">&#x000A;  <h1>My First Blog Post!</h1>&#x000A;  <h2>By Yehuda Katz</h2>&#x000A;  <div class="body">&#x000A;    My first post. Wheeeee!&#x000A;  </div>&#x000A;</div></textarea>
+</p>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Template</h1>
+
+        <p>Not in Backbone</p>
+
+        <ul>
+        <li><a href="http://handlebarsjs.com/">handlebars ❤</a></li>
+        <li><a href="http://api.jquery.com/jquery.tmpl/">jquery-tmpl</a></li>
+        <li><a href="http://documentcloud.github.com/underscore/#template">underscore</a></li>
+        <li><a href="http://akdubya.github.com/dustjs/">dust</a></li>
+        <li><a href="http://twitter.github.com/hogan.js/">mustache with hogan</a></li>
+        <li>...</li>
+        </ul>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>Model</h1>
+
+    <p>We need data !</p>
+
+    <p><textarea class='code' display='none' mode='javascript'>$.getJSON('ajax/test.json', function(data) {});</textarea>
+</p>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>Model</h1>
+
+    <h2>Request each time</h2>
+
+    <p><textarea class='code' display='none' mode='javascript'>function render(){&#x000A;  $.getJSON('ajax/test.json', function(data) {&#x000A;    $('main').html(template(data));&#x000A;  });&#x000A;}</textarea>
+</p>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>Model</h1>
+
+    <h2>Use a cache</h2>
+
+    <p><textarea class='code' display='none' mode='javascript'>$.getJSON('ajax/test.json', function(data) {&#x000A;  window.data = data;&#x000A;}&#x000A;&#x000A;function render(){&#x000A;    $('main').html(window.data);&#x000A;}</textarea>
+</p>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Model</h1>
+
+        <h2>Use a cache</h2>
+
+        <ul>
+        <li>great for mobile</li>
+        <li>gret for performance</li>
+        <li>Cache invalidation is hard</li>
+        </ul>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>Model</h1>
+
+    <h2>In Backbone</h2>
+
+    <p>Create a model, and fetch the data</p>
+
+    <p><textarea class='code' display='none' mode='javascript'>window.MyModel = Backbone.Model.extend({&#x000A;  url: 'ajax/test.json'&#x000A;});&#x000A;window.myModel = new MyModel();&#x000A;&#x000A;myModel.fetch().fail(function(){&#x000A;  console.error('Error to fetch')&#x000A;}).then(function(){</textarea>
+</p>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>Model</h1>
+
+    <h2>In Backbone</h2>
+
+    <p>Use the model a lot.</p>
+
+    <p><textarea class='code' display='none' mode='javascript'>}).then(function(){&#x000A;&#x000A;  myModel.get('title');&#x000A;  myModel.get('title');&#x000A;  myModel.get('title');&#x000A;  myModel.get('title');</textarea>
+</p>
+
+    <p>No requests are sent</p>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>Model</h1>
+
+    <h2>In Backbone</h2>
+
+    <p>we update the data.</p>
+
+    <p><textarea class='code' display='none' mode='javascript'>myModel.set({&#x000A;  title: "My First Blog Post!",&#x000A;});&#x000A;&#x000A;myModel.save().fail(function(){&#x000A;  console.error('Error to save');&#x000A;});</textarea>
+</p>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>Model</h1>
+
+    <h2>In Backbone</h2>
+
+    <p>Without waiting for the answer.</p>
+
+    <p>Continue using the model a lot</p>
+
+    <p><textarea class='code' display='none' mode='javascript'>myModel.get('title');&#x000A;myModel.get('title');&#x000A;myModel.get('title');&#x000A;myModel.get('title');</textarea>
+</p>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Model</h1>
+
+        <h2>In Backbone</h2>
+
+        <p>You only wait for 1 request.</p>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>View</h1>
+
+    <h2>DOM Maniuplation</h2>
+
+    <p><textarea class='code' display='none' mode='htmlmixed'><div class="view-1">&#x000A;  <div class="a-thing"></div>&#x000A;  <input type="button" value="Click on me" />&#x000A;</div></textarea>
+</p>
+
+    <p><textarea class='code' display='none' mode='javascript'>$('input').click(function(){&#x000A;  $('.a-thing').text('Hello World');&#x000A;});</textarea>
+</p>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <p>In real application, it looks more like this:</p>
+
+    <p><textarea class='code' display='none' mode='htmlmixed'><div class="view-1">&#x000A;  <div class="a-thing"></div>&#x000A;  <input type="button" value="Click on me" />&#x000A;</div>&#x000A;<!-- ... -->&#x000A;<div class="view-2">&#x000A;  <div class="something">&#x000A;    <div class="a-thing">&#x000A;      <h1>Hello you</h1>&#x000A;    </div>&#x000A;  </div>&#x000A;</div></textarea>
+</p>
+
+    <p><textarea class='code' display='none' mode='javascript'>$('input').click(function(){&#x000A;  $('.a-thing').text('Hello World');&#x000A;});</textarea>
+</p>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>View</h1>
+
+    <h2>We need DOM isolation</h2>
+
+    <p>A view in Backbone:</p>
+
+    <p><textarea class='code' display='none' mode='javascript'>var View1 = Backbone.View.extend({&#x000A;  events: {&#x000A;    'click button': 'onClick'&#x000A;  },&#x000A;&#x000A;  onClick: function(e){&#x000A;    this.$('.a-thing').text('Add something');&#x000A;  }&#x000A;});&#x000A;&#x000A;var view1 = new View1({el: $('.view1')});</textarea>
+</p>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>Modularize your code</h1>
+
+<ul>
+<li>RequireJS</li>
+<li>With a Namespace</li>
+</ul>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>Modularize your code</h1>
+
+<h2>Create Namespace</h2>
+
+<p>Create a namespace</p>
+
+<p><textarea class='code' display='none' mode='htmlmixed'><script src="namespace.js"></script></textarea>
+</p>
+
+<p><textarea class='code' display='none' mode='javascript'>window.xx = {};&#x000A;xx.view = {};&#x000A;xx.model = {};</textarea>
+</p>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>Modularize your code</h1>
+
+<h2>Extend the namespace</h2>
+
+<p><textarea class='code' display='none' mode='htmlmixed'><script src="view/todo/TodoView.js"></script></textarea>
+</p>
+
+<p><textarea class='code' display='none' mode='javascript'>xx.view.TodoView = Backbone.View.extend({&#x000A;  template: JST.todo,&#x000A;&#x000A;  events: {&#x000A;    'click .refresh': 'render'&#x000A;  },&#x000A;&#x000A;  render: function() {&#x000A;    this.$el.html(this.template({key: "value"}));&#x000A;    return this;&#x000A;  }&#x000A;});</textarea>
+</p>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>Communication</h1>
+
+    <h2>Create an app instance</h2>
+
+    <p><textarea class='code' display='none' mode='htmlmixed'><script src="model/User.js"></script></textarea>
+</p>
+
+    <p><textarea class='code' display='none' mode='javascript'>xx.model.User = Backbone.Model.extend({&#x000A;  url: 'http://company.ext/ajax/data.json'&#x000A;});&#x000A;xx.model.user = new xx.model.User();</textarea>
+</p>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>Communication</h1>
+
+    <h2>Communicate with it</h2>
+
+    <p><textarea class='code' display='none' mode='htmlmixed'><script src="view/todo/TodoView.js"></script></textarea>
+</p>
+
+    <p><textarea class='code' display='none' mode='javascript'>xx.view.TodoView = Backbone.View.extend({&#x000A;&#x000A;  render: function() {&#x000A;    this.$el.html(template({&#x000A;      user: xx.model.user.toJSON()&#x000A;    }));&#x000A;    return this;&#x000A;  }&#x000A;});</textarea>
+</p>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Communication</h1>
+
+        <h2>life cycle === app</h2>
+
+        <p>Communication with app instances ✔</p>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>Communication</h1>
+
+    <h2>Container View:</h2>
+
+    <p><textarea class='code' display='none' mode='htmlmixed'><script src="view/todo/TodoView.js"></script></textarea>
+</p>
+
+    <p><textarea class='code' display='none' mode='javascript'>xx.view.ContainerView = Backbone.View.extend({&#x000A;  template: JST.todo,&#x000A;&#x000A;  initialize: function(){&#x000A;    this.user = new xx.model.User();&#x000A;    this.subView = new xx.view.SubView({&#x000A;      parent: this&#x000A;    });&#x000A;  }&#x000A;});</textarea>
+</p>
+
+    <p>Pass container references to sub views.</p>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>Communication</h1>
+
+    <h2>Sub Views</h2>
+
+    <p><textarea class='code' display='none' mode='javascript'>xx.view.SubView = Backbone.View.extend({&#x000A;  template: JST.todo,&#x000A;&#x000A;  initialize: function(options){&#x000A;    this.parent = options.parent;&#x000A;  },&#x000A;&#x000A;  render: function() {&#x000A;    this.$el.html(this.template({&#x000A;      user: this.parent.user.toJSON()&#x000A;    }));&#x000A;    return this;&#x000A;  }&#x000A;});</textarea>
+</p>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Communication</h1>
+
+        <h2>life cycle === view</h2>
+
+        <p>Communication with view instances ✔</p>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Communication</h1>
+
+        <h2>Model ⇝ View</h2>
+
+        <p>Based on events</p>
+
+        <ul>
+        <li>change</li>
+        <li>change:title</li>
+        <li>reset</li>
+        <li>add</li>
+        <li>remove</li>
+        </ul>
+
+
+        <p>jQuery like method:</p>
+
+        <ul>
+        <li>model.on</li>
+        <li>model.off</li>
+        <li>model.trigger</li>
+        </ul>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>Communication</h1>
+
+    <h2>Model ⇝ View</h2>
+
+    <p><textarea class='code' display='none' mode='javascript'>var View1 = Backbone.View.extend({&#x000A;  initialize: function(){&#x000A;    xx.model.user.on('change', this.render);&#x000A;  },&#x000A;&#x000A;  render: function() {&#x000A;    this.$el.html(this.template({&#x000A;      user: xx.model.user.toJSON()&#x000A;    }));&#x000A;    return this;&#x000A;  }&#x000A;});</textarea>
+
+    <textarea class='code' display='none' mode='javascript'>xx.model.user.set({name: 'Romain'});</textarea>
+</p>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>Communication</h1>
+
+<h2>Model ⇝ View</h2>
+
+<p><textarea class='code' display='none' mode='javascript'>xx.model.user.set({name: 'Romain'});</textarea>
+</p>
+
+<p>several events are triggered: <code>change</code>, <code>change:name</code></p>
+
+<p><textarea class='code' display='none' mode='javascript'>xx.model.user.on('change', this.render);</textarea>
+</p>
+
+<p>You can listen different events: <code>all</code>, <code>change</code>, <code>change:name</code></p>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>Memory leak</h1>
+
+<h2>Event Listener ⇒ Memory leak</h2>
+
+<p>Create a dispose method</p>
+
+<p><textarea class='code' display='none' mode='javascript'>var View1 = Backbone.View.extend({&#x000A;  initialize: function(){&#x000A;    xx.model.user.on('change', this.render);&#x000A;  },&#x000A;&#x000A;  dispose: function(){&#x000A;    xx.model.user.off('change', this.render);&#x000A;  }&#x000A;};</textarea>
+
+Call <code>dispose</code> manually.</p>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='leak slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>Memory leak</h1>
+
+    <h2>Event Listener ⇒ Memory leak</h2>
+
+    <p>Or do it automatically with <a href="https://github.com/Filirom1/Backbone.dispose">Backbone.dispose</a> plugin</p>
+
+    <p><textarea class='code' display='none' mode='javascript'>new View1({el: $('.div1')});&#x000A;&#x000A;$('.div1').remove(); //dispose called&#x000A;$('.div1').html('<div/>'); //dispose called</textarea>
+</p>
+
+    <p><img src="https://github.com/Filirom1/Backbone.dispose/raw/master/draft.png" alt="leak" /></p>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>Optimize for prod</h1>
+
+    <h2>Concat, minify, md5</h2>
+
+    <p>Transform this</p>
+
+    <p><textarea class='code' display='none' mode='htmlmixed'><script src="vendor/log.js"></script>&#x000A;<script src="vendor/underscore.js"></script>&#x000A;<script src="vendor/backbone.js"></script>&#x000A;<script src="vendor/handlebars.js"></script>&#x000A;<script src="namespace.js"></script>&#x000A;<!-- ... -->&#x000A;<script src="templates.js"></script>&#x000A;<script src="view/todo/TodoView.js"></script>&#x000A;<script src="Router.js"></script></textarea>
+</p>
+
+    <p>into this</p>
+
+    <p><textarea class='code' display='none' mode='htmlmixed'><script src="app.6423e0.js"></script></textarea>
+</p>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Optimize for prod</h1>
+
+        <h2>Even more</h2>
+
+        <ul>
+        <li><a href="http://coffeescript.org/">coffee-script</a></li>
+        <li><a href="http://lesscss.org/">less-css</a></li>
+        <li><a href="http://optipng.sourceforge.net/">optipng</a></li>
+        <li><a href="http://jpegclub.org/jpegtran/">jpegtran</a></li>
+        <li>minify, concat, md5 your js</li>
+        <li>minify, concat, md5 your css</li>
+        <li><a href="https://github.com/Filirom1/css-base64-images">css-b64-images</a></li>
+        <li><a href="https://github.com/kangax/html-minifier">minify html</a></li>
+        </ul>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>Optimize for prod</h1>
+
+<h2>Build tools</h2>
+
+<p>Java: <a href="http://code.google.com/p/wro4j/">Wro4J</a></p>
+
+<p>NodeJs:, <a href="https://github.com/Backbonist/no-build-conf-build-script">No-Build-Conf</a>, <a href="https://github.com/h5bp/node-build-script">h5bp build script</a></p>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>Modularize your templates</h1>
+
+<h2>Several HTML files</h2>
+
+<pre><code>.
+├── helpers.hbs
+├── multiple.hbs
+├── partials.hbs
+├── plain.hbs
+├── sample.hbs
+└── subfolder
+    └── subsub
+        └── sample.hbs
+</code></pre>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>Modularize your templates</h1>
+
+<h2>Precompiled into 1 JS file</h2>
+
+<p><textarea class='code' display='none' mode='htmlmixed'><script src="templates.js"></script></textarea>
+</p>
+
+<p>Use it simply</p>
+
+<p><textarea class='code' display='none' mode='javascript'>$('#main').html(JST.sample({title: 'Hello World'}));</textarea>
+</p>
+
+<p>Instead of</p>
+
+<p><textarea class='code' display='none' mode='javascript'>$.get('/template/my-template.html', function(templateStr){&#x000A;  var template = Handlebars.compile(templateStr);&#x000A;  $('#main').html(template({title: 'Hello World'})}&#x000A;})</textarea>
+</p>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>SEO</h1>
+
+        <h2>Search Engine Optimization</h2>
+
+        <ul>
+        <li>Do not use SPA</li>
+        <li>Proxify all requests to a headless browser</li>
+        </ul>
+
+
+        <p><a href="https://github.com/Backbonist/spaseo">spa-seo</a></p>
+
+        <p>☠ Not tested in production.</p>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>i18n</h1>
+
+    <h2>internationalization</h2>
+
+    <p><a href="https://github.com/SlexAxton/messageformat.js/blob/master/example/en/colors.json">en/colors.json</a>
+    <textarea class='code' display='none' mode='javascript'>{&#x000A;  "red": "red",&#x000A;  "blue": "blue"&#x000A;}</textarea>
+</p>
+
+    <p><a href="https://github.com/SlexAxton/messageformat.js/blob/master/example/fr/colors.json">fr/colors.json</a>
+    <textarea class='code' display='none' mode='javascript'>{&#x000A;  "red": "rouge",&#x000A;  "blue": "bleu"&#x000A;}</textarea>
+
+    <a href="https://github.com/SlexAxton/messageformat.js">messageFormat</a></p>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>i18n</h1>
+
+<h2>internationalization</h2>
+
+<p>Compile it</p>
+
+<pre><code>messageformat --locale en ./en ./en/i18n.js
+</code></pre>
+
+<p><textarea class='code' display='none' mode='javascript'>var locale =&#x000A;  (localStorage.getItem('lang') || 'en')&#x000A;  + '/i18n.js';&#x000A;&#x000A;document.write(&#x000A;  '<script src="' + locale + "><\/script>');</textarea>
+</p>
+
+<p>then use it:</p>
+
+<p><textarea class='code' display='none' mode='javascript'>window.i18n.colors.red()</textarea>
+</p>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>tests</h1>
+
+        <h2>Unit tests</h2>
+
+        <ul>
+        <li><a href="http://docs.jquery.com/QUnit">Qunit</a></li>
+        <li><a href="http://pivotal.github.com/jasmine/">Jasmine</a></li>
+        <li><a href="http://visionmedia.github.com/mocha/">Mocha</a></li>
+        </ul>
+
+
+        <p>Mocking tools: <a href="http://sinonjs.org/">Sinon.js</a></p>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>tests</h1>
+
+        <h2>Functional tests</h2>
+
+        <ul>
+        <li><a href="http://seleniumhq.org/">Selenium</a></li>
+        <li><a href="http://phantomjs.org/">PhantomJs</a></li>
+        <li><a href="http://casperjs.org/">Casper</a></li>
+        <li><a href="http://zombie.labnotes.org/">ZombieJS</a></li>
+        </ul>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <!-- deck.js navigation extension -->
+    <a class='deck-prev-link' href='#' title='Previous'>&#8592;</a>
+    <a class='deck-next-link' href='#' title='Next'>&#8594;</a>
+    <!-- deck.js hash extension -->
+    <a class='deck-permalink' href='.' title='Permalink to this slide'>#</a>
+    <!-- deck.js status extension -->
+    <p class='deck-status'>
+      <span class='deck-status-current'></span>
+      /
+      <span class='deck-status-total'></span>
+    </p>
+    <!-- jQuery & deck.js -->
+    <script src="deck.js/support/jquery.1.6.4.min.js" type="text/javascript"></script>
+    <script src="deck.js/core/deck.core.js" type="text/javascript"></script>
+    <!-- deck.js extension JS files -->
+    <script src="deck.js/extensions/menu/deck.menu.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/navigation/deck.navigation.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/goto/deck.goto.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/hash/deck.hash.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/status/deck.status.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/scale/deck.scale.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/codemirror/deck.codemirror.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/codemirror/mode/javascript/javascript.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/codemirror/mode/htmlmixed/htmlmixed.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/codemirror/mode/xmlpure/xmlpure.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/codemirror/mode/yaml/yaml.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/codemirror/mode/clojure/clojure.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/codemirror/mode/coffeescript/coffeescript.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/codemirror/mode/haskell/haskell.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/codemirror/mode/xml/xml.js" type="text/javascript"></script>
+    <!-- your custom JS here, including call to initialize deck.js-codemirror -->
+    <script src="js/my_presentation.js" type="text/javascript"></script>
+    <!-- Initialize the deck. -->
+    <script type='text/javascript'>
+      $(function() { $.deck('.slide'); });
+    </script>
+  </body>
+</html>
