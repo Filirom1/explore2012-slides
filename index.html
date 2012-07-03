@@ -221,7 +221,7 @@ http://company.ext/page2/a-sub-page
   <li><a href="#slide-45">modularize your templates</a></li>
   <li><a href="#slide-47">SEO</a></li>
   <li><a href="#slide-48">i18n</a></li>
-  <li><a href="#slide-50">test</a></li>
+  <li><a href="#slide-53">test</a></li>
 </ul>
   </div>
   <div class='spacer bottom'></div>
@@ -655,7 +655,6 @@ Call <code>dispose</code> manually.</p>
     <p><textarea class='code' display='none' mode='javascript'>new View1({el: $('.div1')});&#x000A;&#x000A;$('.div1').remove(); //dispose called&#x000A;$('.div1').html('<div/>'); //dispose called</textarea>
 </p>
 
-    <p><img src="https://github.com/Filirom1/Backbone.dispose/raw/master/draft.png" alt="leak" /></p>
   </div>
   <div class='spacer bottom'></div>
 </section>
@@ -749,7 +748,8 @@ Call <code>dispose</code> manually.</p>
 <p>Instead of</p>
 
 <p><textarea class='code' display='none' mode='javascript'>$.get('/template/my-template.html', function(templateStr){&#x000A;  var template = Handlebars.compile(templateStr);&#x000A;  $('#main').html(template({title: 'Hello World'})}&#x000A;})</textarea>
-</p>
+
+<a href="https://github.com/wookiehangover/universal-jst">universal-jst</a></p>
   </div>
   <div class='spacer bottom'></div>
 </section>
@@ -813,39 +813,147 @@ Call <code>dispose</code> manually.</p>
   <div class='spacer bottom'></div>
 </section>
     <section class='slide'>
-      <div class='spacer top'></div>
-      <div class='content'>
-        <h1>tests</h1>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>i18n</h1>
 
-        <h2>Unit tests</h2>
+    <h2>internationalization</h2>
 
-        <ul>
-        <li><a href="http://docs.jquery.com/QUnit">Qunit</a></li>
-        <li><a href="http://pivotal.github.com/jasmine/">Jasmine</a></li>
-        <li><a href="http://visionmedia.github.com/mocha/">Mocha</a></li>
-        </ul>
+    <p><textarea class='code' display='none' mode='&#x000A;{GENDER, select,'>male {He}&#x000A;  female {She}&#x000A;   other {They}&#x000A;} found {NUM_RESULTS, plural,&#x000A;            one {1 result}&#x000A;          other {# results}&#x000A;        } in {NUM_CATEGORIES, plural,&#x000A;                  one {1 category}&#x000A;                other {# categories}&#x000A;             }.</textarea>
+</p>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>i18n</h1>
+
+    <h2>internationalization</h2>
+
+    <p><textarea class='code' display='none' mode='javascript'>{&#x000A;  "GENDER"         : "male",&#x000A;  "NUM_RESULTS"    : 1,&#x000A;  "NUM_CATEGORIES" : 2&#x000A;}&#x000A;> "He found 1 result in 2 categories."&#x000A;&#x000A;{&#x000A;  "GENDER"         : "female",&#x000A;  "NUM_RESULTS"    : 1,&#x000A;  "NUM_CATEGORIES" : 2&#x000A;}&#x000A;> "She found 1 result in 2 categories."</textarea>
+</p>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>i18n</h1>
+
+    <h2>internationalization</h2>
+
+    <p><textarea class='code' display='none' mode='javascript'>{&#x000A;  "GENDER"         : "male",&#x000A;  "NUM_RESULTS"    : 2,&#x000A;  "NUM_CATEGORIES" : 1&#x000A;}&#x000A;> "He found 2 results in 1 category."&#x000A;&#x000A;{&#x000A;  "NUM_RESULTS"    : 2,&#x000A;  "NUM_CATEGORIES" : 2&#x000A;}&#x000A;> "They found 2 results in 2 categories."</textarea>
+</p>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>tests</h1>
+
+    <h2>Test Framework : Mocha</h2>
+
+    <ul>
+    <li><a href="http://visionmedia.github.com/mocha/">http://visionmedia.github.com/mocha/</a></li>
+    </ul>
 
 
-        <p>Mocking tools: <a href="http://sinonjs.org/">Sinon.js</a></p>
-      </div>
-      <div class='spacer bottom'></div>
-    </section>
+    <p><textarea class='code' display='none' mode='javascript'>describe('Home page', function(){&#x000A;  it('should do something when ...', function(done){&#x000A;    // test&#x000A;    done()&#x000A;  });&#x000A;&#x000A;  it('should do something when ...', function(done){&#x000A;    // test&#x000A;    done()&#x000A;  });&#x000A;});</textarea>
+</p>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>tests</h1>
+
+    <h2>Assert Framework : Chai</h2>
+
+    <ul>
+    <li><a href="http://chaijs.com/">http://chaijs.com/</a></li>
+    </ul>
+
+
+    <p><textarea class='code' display='none' mode='javascript'>expect([]).to.be.empty;&#x000A;expect('foobar').to.contain('foo');&#x000A;expect({ foo: 'bar' }).to.include.keys('foo');&#x000A;expect('foo').to.have.length.below(4);&#x000A;expect(7).to.be.within(5,10);&#x000A;// ...</textarea>
+</p>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>tests</h1>
+
+    <h2>jQuery helpers : Chai-jQuery</h2>
+
+    <ul>
+    <li><a href="https://github.com/chaijs/chai-jquery">https://github.com/chaijs/chai-jquery</a>
+    <textarea class='code' display='none' mode='javascript'>expect($('#main h2')).to.have.text('Hey guy');&#x000A;expect($('body')).to.have.class('foo');&#x000A;expect($('.year')).to.be.visible;&#x000A;expect($('#nonexistent')).not.to.exist;&#x000A;expect($('#content')).to.contain('text');</textarea>
+</li>
+    </ul>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>tests</h1>
+
+<h2>All together</h2>
+
+<p><textarea class='code' display='none' mode='htmlmixed'><div id="mocha"></div>&#x000A;&#x000A;<script src="/test/vendor/mocha.js"></script>&#x000A;<script src="/test/vendor/chai.js"></script>&#x000A;<script src="/test/vendor/chai-jquery.js"></script>&#x000A;<script data-build-exclude="true">&#x000A;  mocha.setup('bdd');&#x000A;  expect = chai.expect;&#x000A;</script>&#x000A;<script src="/test/test.web.js"></script></textarea>
+
+Not runned unless you type <code>mocha.run()</code></p>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
+    <section class='slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>tests</h1>
+
+    <h2>A dummy test</h2>
+
+    <p><textarea class='code' display='none' mode='javascript'>expect = chai.expect;&#x000A;&#x000A;describe('Test web', function(){&#x000A;  it('should print `Hey guy` ' +&#x000A;     'when clicking on link toto', function(done){&#x000A;&#x000A;    $('a[href="/toto"]').click();&#x000A;    expect($('#main h2')).to.have.text('Hey guy');&#x000A;    done();&#x000A;&#x000A;  });&#x000A;});</textarea>
+</p>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
     <section class='slide'>
       <div class='spacer top'></div>
       <div class='content'>
         <h1>tests</h1>
 
-        <h2>Functional tests</h2>
+        <h2>Works in your browser</h2>
 
-        <ul>
-        <li><a href="http://seleniumhq.org/">Selenium</a></li>
-        <li><a href="http://phantomjs.org/">PhantomJs</a></li>
-        <li><a href="http://casperjs.org/">Casper</a></li>
-        <li><a href="http://zombie.labnotes.org/">ZombieJS</a></li>
-        </ul>
+        <p><img src="http://www.ressources-du-web.com/wp-content/uploads/2011/11/browsers2.png" alt="http://www.ressources-du-web.com/wp-content/uploads/2011/11/browsers2.png" /></p>
+
+        <p>Thanks jQuery</p>
       </div>
       <div class='spacer bottom'></div>
     </section>
+    <section class='slide'>
+  <div class='spacer top'></div>
+  <div class='content'>
+    <h1>tests</h1>
+
+<h2>And in phantomjs</h2>
+
+<pre><code>cd ~/in
+serve -P &amp;
+http_proxy="" phantomjs run-mocha.js http://test:3000
+Finished in 2.5s.
+....F
+</code></pre>
+
+<p><a href="https://gist.github.com/3041251">https://gist.github.com/3041251</a>
+<img src="http://ariya.ofilabs.com/wp-content/uploads/2012/03/cloudphantomjs.png" alt="http://ariya.ofilabs.com/wp-content/uploads/2012/03/cloudphantomjs.png" /></p>
+  </div>
+  <div class='spacer bottom'></div>
+</section>
     <!-- deck.js navigation extension -->
     <a class='deck-prev-link' href='#' title='Previous'>&#8592;</a>
     <a class='deck-next-link' href='#' title='Next'>&#8594;</a>

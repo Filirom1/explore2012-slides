@@ -752,6 +752,7 @@ $.get('/template/my-template.html', function(templateStr){
   $('#main').html(template({title: 'Hello World'})}
 })
 ```
+[universal-jst](https://github.com/wookiehangover/universal-jst)
 
 !SLIDE
 # SEO
@@ -809,20 +810,164 @@ then use it:
 ```
 
 !SLIDE
-# tests
-## Unit tests
+# i18n
+## internationalization
 
-* [Qunit](http://docs.jquery.com/QUnit)
-* [Jasmine](http://pivotal.github.com/jasmine/)
-* [Mocha](http://visionmedia.github.com/mocha/)
+```
+{GENDER, select,
+    male {He}
+  female {She}
+   other {They}
+} found {NUM_RESULTS, plural,
+            one {1 result}
+          other {# results}
+        } in {NUM_CATEGORIES, plural,
+                  one {1 category}
+                other {# categories}
+             }.
+```
 
-Mocking tools: [Sinon.js](http://sinonjs.org/)
+!SLIDE
+# i18n
+## internationalization
+
+
+``` javascript
+{
+  "GENDER"         : "male",
+  "NUM_RESULTS"    : 1,
+  "NUM_CATEGORIES" : 2
+}
+> "He found 1 result in 2 categories."
+
+{
+  "GENDER"         : "female",
+  "NUM_RESULTS"    : 1,
+  "NUM_CATEGORIES" : 2
+}
+> "She found 1 result in 2 categories."
+```
+
+!SLIDE
+# i18n
+## internationalization
+
+``` javascript
+{
+  "GENDER"         : "male",
+  "NUM_RESULTS"    : 2,
+  "NUM_CATEGORIES" : 1
+}
+> "He found 2 results in 1 category."
+
+{
+  "NUM_RESULTS"    : 2,
+  "NUM_CATEGORIES" : 2
+}
+> "They found 2 results in 2 categories."
+```
+
 
 !SLIDE
 # tests
-## Functional tests
+## Test Framework : Mocha
 
-* [Selenium](http://seleniumhq.org/)
-* [PhantomJs](http://phantomjs.org/)
-* [Casper](http://casperjs.org/)
-* [ZombieJS](http://zombie.labnotes.org/)
+* [http://visionmedia.github.com/mocha/](http://visionmedia.github.com/mocha/)
+
+``` javascript
+describe('Home page', function(){
+  it('should do something when ...', function(done){
+    // test
+    done()
+  });
+
+  it('should do something when ...', function(done){
+    // test
+    done()
+  });
+});
+```
+
+!SLIDE
+# tests
+## Assert Framework : Chai
+* [http://chaijs.com/](http://chaijs.com/)
+
+``` javascript
+expect([]).to.be.empty;
+expect('foobar').to.contain('foo');
+expect({ foo: 'bar' }).to.include.keys('foo');
+expect('foo').to.have.length.below(4);
+expect(7).to.be.within(5,10);
+// ...
+```
+
+!SLIDE
+# tests
+## jQuery helpers : Chai-jQuery
+* [https://github.com/chaijs/chai-jquery](https://github.com/chaijs/chai-jquery)
+``` javascript
+expect($('#main h2')).to.have.text('Hey guy');
+expect($('body')).to.have.class('foo');
+expect($('.year')).to.be.visible;
+expect($('#nonexistent')).not.to.exist;
+expect($('#content')).to.contain('text');
+```
+
+!SLIDE
+# tests
+## All together
+
+``` htmlmixed
+<div id="mocha"></div>
+
+<script src="/test/vendor/mocha.js"></script>
+<script src="/test/vendor/chai.js"></script>
+<script src="/test/vendor/chai-jquery.js"></script>
+<script data-build-exclude="true">
+  mocha.setup('bdd');
+  expect = chai.expect;
+</script>
+<script src="/test/test.web.js"></script>
+```
+Not runned unless you type `mocha.run()`
+
+!SLIDE
+# tests
+## A dummy test
+
+
+``` javascript
+expect = chai.expect;
+
+describe('Test web', function(){
+  it('should print `Hey guy` ' +
+     'when clicking on link toto', function(done){
+
+    $('a[href="/toto"]').click();
+    expect($('#main h2')).to.have.text('Hey guy');
+    done();
+
+  });
+});
+```
+
+!SLIDE
+# tests
+## Works in your browser
+
+![http://www.ressources-du-web.com/wp-content/uploads/2011/11/browsers2.png](http://www.ressources-du-web.com/wp-content/uploads/2011/11/browsers2.png)
+
+Thanks jQuery
+
+!SLIDE
+# tests
+## And in phantomjs
+
+    cd ~/in
+    serve -P &
+    http_proxy="" phantomjs run-mocha.js http://test:3000
+    Finished in 2.5s.
+    ....F
+[https://gist.github.com/3041251](https://gist.github.com/3041251)
+![http://ariya.ofilabs.com/wp-content/uploads/2012/03/cloudphantomjs.png](http://ariya.ofilabs.com/wp-content/uploads/2012/03/cloudphantomjs.png)
