@@ -35,6 +35,26 @@ PEPS - BSD
 ```
 
 !SLIDE
+# Separation of concerns
+
+* KLOC of Javascript mixed with Server side rendering.
+
+![Quite hard](http://images.lifesambrosia.com/food/large/spaghetti-carbonara.jpg)
+
+
+!SLIDE long
+# Separation of concerns
+
+MIDLLE === WebService REST
+
+![REST Webservice](http://www.crummy.com/writing/RESTful-Web-Services/cover.png)
+
+FRONT === Serving static files: html, css, js
+
+![Nginx](http://blog.dev-art.fr/wp-content/uploads/2012/03/nginx_php1.gif)
+
+
+!SLIDE
 # URL History
 
 ## Classic:
@@ -149,26 +169,6 @@ var App = Backbone.Router.extend({
 
 Backbone.history.start({pushState: true})
 ```
-
-!SLIDE
-# Separation of concerns
-
-* KLOC of Javascript mixed with Server side rendering.
-
-![Quite hard](http://images.lifesambrosia.com/food/large/spaghetti-carbonara.jpg)
-
-
-!SLIDE long
-# Separation of concerns
-
-MIDLLE === WebService REST
-
-![REST Webservice](http://www.crummy.com/writing/RESTful-Web-Services/cover.png)
-
-FRONT === Serving static files: html, css, js
-
-![Nginx](http://blog.dev-art.fr/wp-content/uploads/2012/03/nginx_php1.gif)
-
 
 !SLIDE
 # Separation of concerns
