@@ -27,7 +27,7 @@ PEPS - BSD
   <link rel="stylesheet" href="app.459703.css">
 </head>
 <body>
-  <div role="main"> </div>
+  <div id="main"> </div>
 
   <script src="app.6423e0.js"></script>
 </body>
